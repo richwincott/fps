@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 114798623099356288}
   - component: {fileID: 7664031234197934402}
   - component: {fileID: 65749641604039740}
-  - component: {fileID: 114583728328023266}
+  - component: {fileID: 3498197378112098316}
   m_Layer: 10
   m_Name: Chest
   m_TagString: Pickup
@@ -110,14 +110,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPickupPrefab: {fileID: 4925752947849505290, guid: 22e143407ff4491458ff14f45504973d,
     type: 3}
-  weaponPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   weaponSpawns:
   - {fileID: 8903419059461688701}
   - {fileID: 1906673687992541330}
   - {fileID: 6121280925575604792}
+  weaponPrefabs:
+  - {fileID: 4607440807918600878, guid: b38d1f0de2168fb43b3c34b755327d03, type: 3}
+  - {fileID: 4607440807918600878, guid: f6907a86a033a844fbd9f0a35d707c7c, type: 3}
 --- !u!65 &65749641604039740
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -131,7 +130,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1805086, y: 0.7590718, z: 0.80783916}
   m_Center: {x: 0, y: -0.12046409, z: 0}
---- !u!114 &114583728328023266
+--- !u!114 &3498197378112098316
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,30 +139,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2432910289645550237}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &6121280925575604792
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +254,10 @@ PrefabInstance:
       value: Wooden Chest
       objectReference: {fileID: 0}
     - target: {fileID: 4090485074951322, guid: e6fd1715965d63043a413dea8f583622, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090485074951322, guid: e6fd1715965d63043a413dea8f583622, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -278,6 +270,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4090485074951322, guid: e6fd1715965d63043a413dea8f583622, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090485074951322, guid: e6fd1715965d63043a413dea8f583622, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -287,14 +283,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4090485074951322, guid: e6fd1715965d63043a413dea8f583622, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4090485074951322, guid: e6fd1715965d63043a413dea8f583622, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4090485074951322, guid: e6fd1715965d63043a413dea8f583622, type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4090485074951322, guid: e6fd1715965d63043a413dea8f583622, type: 3}

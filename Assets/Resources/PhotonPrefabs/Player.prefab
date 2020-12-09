@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 1667319640928434509}
-  primaryWeaponPrefab: {fileID: 4607440807918600878, guid: f6907a86a033a844fbd9f0a35d707c7c,
+  primaryWeaponPrefab: {fileID: 4607440807918600878, guid: f336be75d60e7ed40ae90094151d5aac,
     type: 3}
   secondaryWeaponPrefab: {fileID: 4607440807918600878, guid: f336be75d60e7ed40ae90094151d5aac,
     type: 3}

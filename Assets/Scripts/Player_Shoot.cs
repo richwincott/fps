@@ -43,12 +43,9 @@ public class Player_Shoot : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
-        if (!currentWeaponController)
-        {
-            GameObject currentWeapon = weaponHolderController.GetCurrentWeapon();
-            if (currentWeapon)
-                currentWeaponController = currentWeapon.GetComponent<WeaponController>();
-        }
+        GameObject currentWeapon = weaponHolderController.GetCurrentWeapon();
+        if (currentWeapon)
+            currentWeaponController = currentWeapon.GetComponent<WeaponController>();
 
         if (currentWeaponController)
         {
