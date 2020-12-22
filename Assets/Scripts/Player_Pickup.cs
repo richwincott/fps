@@ -23,7 +23,7 @@ public class Player_Pickup : MonoBehaviourPunCallbacks
     public void Start()
     {
         playerUI = GameObject.Find("PlayerUI").GetComponent<PlayerUI>();
-        myCamera = GetComponent<Player>().myCam;
+        myCamera = GetComponentInChildren<Camera>();
     }
 
     public void FixedUpdate()

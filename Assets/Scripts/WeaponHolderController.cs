@@ -163,12 +163,12 @@ public class WeaponHolderController : MonoBehaviour
 
             if (Input.GetButtonDown("Fire2"))
             {
-                GetCurrentWeapon().GetComponent<WeaponSwayScript>().isEnabled = false;
+                //GetCurrentWeapon().GetComponent<WeaponSwayScript>().isEnabled = false;
                 player.TransmitAimState(true);
             }
             if (Input.GetButtonUp("Fire2"))
             {
-                GetCurrentWeapon().GetComponent<WeaponSwayScript>().isEnabled = true;
+                //GetCurrentWeapon().GetComponent<WeaponSwayScript>().isEnabled = true;
                 player.TransmitAimState(false);
             }
         }

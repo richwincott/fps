@@ -3,7 +3,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player_Health : MonoBehaviourPunCallbacks
+public class Player_Health : MonoBehaviourPunCallbacks, IDamageable
 {
     PhotonView PV;
 
@@ -52,9 +52,9 @@ public class Player_Health : MonoBehaviourPunCallbacks
         SetHealthText();
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(int amount)
     {
-        health -= dmg;
+        health -= amount;
 
         if (PV.IsMine)
         {

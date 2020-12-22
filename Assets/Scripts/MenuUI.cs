@@ -5,7 +5,7 @@ public class MenuUI : MonoBehaviourPunCallbacks
 {
     public static MenuUI Instance;
 
-    private bool menuToggle = false;
+    public bool menuToggle = false;
 
     void Awake()
     {
@@ -24,20 +24,10 @@ public class MenuUI : MonoBehaviourPunCallbacks
         if (menuToggle)
         {
             GetComponent<Canvas>().enabled = true;
-            GameObject player = GameObject.Find(PhotonNetwork.NickName);
-            player.GetComponent<Player>().ccc.enabled = false;
-            player.GetComponent<Player>().cmc.enabled = false;
-            player.GetComponent<Player_Shoot>().enabled = false;
-            player.GetComponent<Player>().weaponHolder.GetComponent<WeaponHolderController>().GetCurrentWeapon().GetComponent<WeaponSwayScript>().enabled = false;
         }
         else
         {
             GetComponent<Canvas>().enabled = false;
-            GameObject player = GameObject.Find(PhotonNetwork.NickName);
-            player.GetComponent<Player>().ccc.enabled = true;
-            player.GetComponent<Player>().cmc.enabled = true;
-            player.GetComponent<Player_Shoot>().enabled = true;
-            player.GetComponent<Player>().weaponHolder.GetComponent<WeaponHolderController>().GetCurrentWeapon().GetComponent<WeaponSwayScript>().enabled = true;
         }
     }
 }

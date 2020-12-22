@@ -14,19 +14,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
     [SerializeField]
     WeaponHolderController weaponHolderController;
 
-    private WeaponController currentWeaponController;
-    private float horizontal;
-    private float vertical;
-    private float mouseX;
-    private float mouseY;
-
-    float verticalLookRotation;
+    WeaponController currentWeaponController;
+    float horizontal;
+    float vertical;
+    float mouseX;
+    float mouseY;
     bool grounded;
-    Vector3 smoothMoveVelocity;
-    Vector3 moveAmount;
-
     Rigidbody rb;
-
     PhotonView PV;
 
     void Awake()
@@ -44,20 +38,31 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
     }
 
+    public override void OnEnable()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        base.OnEnable();
+    }
+
+    public override void OnDisable()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        base.OnDisable();
+    }
+
     void Update()
     {
         if (!PV.IsMine)
             return;
 
         GetInputs();
-        LookY();
-        Jump();
-    }
-
-    private void FixedUpdate()
-    {
         Move();
-        LookX();
+        Look();
+        Jump();
     }
 
     void GetInputs()
@@ -75,19 +80,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
             currentWeaponController.animator.Play("Idle");
     }
 
-    void LookY()
+    void Look()
     {
-        verticalLookRotation += mouseY * mouseSensitivity;
-        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
+        Quaternion deltaRotation = Quaternion.Euler(Vector3.up * mouseX * mouseSensitivity * Time.deltaTime);
+        rb.MoveRotation(transform.rotation * deltaRotation);
 
-        cameraHolder.transform.localEulerAngles = Vector3.left * verticalLookRotation;
-    }
-
-    void LookX()
-    {
-        Quaternion deltaRotation = Quaternion.Euler(-Vector3.up * mouseX * mouseSensitivity * Time.deltaTime);
-        rb.MoveRotation(rb.rotation * deltaRotation);
-
+        cameraHolder.transform.localRotation *= Quaternion.Euler(Vector3.left * mouseY * mouseSensitivity * Time.deltaTime);
     }
 
     void Move()

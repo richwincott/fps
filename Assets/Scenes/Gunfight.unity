@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.58219117, g: 0.67774147, b: 0.8396226, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.0012
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -258,8 +258,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.6886792, g: 0.63977474, b: 0.46453363, a: 1}
+  m_Intensity: 1.4
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -761,6 +761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb2f1f9d8083e747b539825d13c48ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuToggle: 0
 --- !u!1 &827391041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1253,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677101888}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -1544,11 +1545,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberToSpawn: 20
-  weaponPrefabs:
-  - {fileID: 4607440807918600878, guid: b38d1f0de2168fb43b3c34b755327d03, type: 3}
-  - {fileID: 4607440807918600878, guid: f6907a86a033a844fbd9f0a35d707c7c, type: 3}
-  chestPrefab: {fileID: 2432910289645550237, guid: c5e5ee4917c6ee440938914a6291e1bf,
-    type: 3}
 --- !u!1 &1912047605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1644,7 +1640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &2002210088
 AudioListener:
   m_ObjectHideFlags: 0
