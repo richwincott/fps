@@ -5,25 +5,26 @@ using UnityEngine.UI;
 
 public class Player_Health : MonoBehaviourPunCallbacks, IDamageable
 {
+    [SerializeField]
+    private AudioSource bombSound;
+
     PhotonView PV;
-
     public int health = 100;
-
     public bool alive = true;
-    private Text healthText;
-    private PlayerUI playerUI;
+    Text healthText;
+    PlayerUI playerUI;
+    PlayerManager playerManager;
 
     void Awake()
     {
         PV = GetComponent<PhotonView>();
+        playerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<PlayerManager>();
     }
 
     void Start()
     {
-        GameManager.RespawnClickEvent += RestoreHealth;
         healthText = GameObject.Find("Health Text").GetComponent<Text>();
         playerUI = GameObject.Find("PlayerUI").GetComponent<PlayerUI>();
-        TransmitHealth(health);
         SetHealthText();
     }
 
@@ -54,46 +55,27 @@ public class Player_Health : MonoBehaviourPunCallbacks, IDamageable
 
     public void TakeDamage(int amount)
     {
+        PV.RPC("RPC_TakeDamage", RpcTarget.All, amount);
+    }
+
+    [PunRPC]
+    void RPC_TakeDamage(int amount)
+    {
+        if (!PV.IsMine)
+            return;
+        
         health -= amount;
+        playerUI.damageScreenFlash.SetActive(true);
 
-        if (PV.IsMine)
+        if (health <= 0)
         {
-            playerUI.damageScreenFlash.SetActive(true);
+            Die();
+            bombSound.Play();
         }
     }
 
-    public void InflictDamage(int dmg)
+    void Die()
     {
-        Hashtable hash = new Hashtable();
-        hash.Add("inflictedDamage", dmg);
-        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-    }
-
-    private void TransmitHealth(int value)
-    {
-        if (PV.IsMine)
-        {
-            Hashtable hash = new Hashtable();
-            hash.Add("health", value);
-            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-        }
-    }
-
-    private void RestoreHealth()
-    {
-        health = 100;
-        TransmitHealth(health);
-    }
-
-    public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, Hashtable changedProps)
-    {
-        if (!PV.IsMine && targetPlayer == PV.Owner)
-        {
-            if (changedProps.ContainsKey("health"))
-                health = (int)changedProps["health"];
-
-            if (changedProps.ContainsKey("inflictedDamage"))
-                TakeDamage((int)changedProps["inflictedDamage"]);
-        }
+        playerManager.Respawn();
     }
 }

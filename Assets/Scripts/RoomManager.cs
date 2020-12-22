@@ -9,6 +9,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
     public static RoomManager Instance;
 
+    GameObject playerManager;
+
     void Awake()
     {
         if (Instance)
@@ -34,6 +36,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
+        playerManager.GetComponent<PlayerManager>().Die();
         Destroy(RoomManager.Instance.gameObject);
         StartCoroutine(DisconnectAndLoad());
     }
@@ -50,7 +53,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if (scene.buildIndex == 1) // We're in the game scene
         {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+            playerManager = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
         }
     }
 }

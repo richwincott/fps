@@ -142,8 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partyHat: {fileID: 7089463943590534721}
   glasses: {fileID: 2996232176990021152}
-  weaponHolder: {fileID: 1667319640928434510}
-  bombSound: {fileID: 82541678826853106}
+  weaponHolderController: {fileID: 1667319640928434508}
   aiming: 0
   weaponId: 1
   previousWeaponId: -1
@@ -241,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1601c417d21cc84d84e4ce5a4f1a57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombSound: {fileID: 0}
   health: 100
   alive: 1
 --- !u!114 &114140264373358622

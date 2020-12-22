@@ -5,8 +5,6 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     public GameObject hitMarker;
     [SerializeField]
-    public GameObject respawnButton;
-    [SerializeField]
     public GameObject damageScreenFlash;
     [SerializeField]
     public GameObject ammoText;

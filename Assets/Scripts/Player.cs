@@ -6,13 +6,11 @@ using ExitGames.Client.Photon;
 public class Player : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    private GameObject partyHat;
+    GameObject partyHat;
     [SerializeField]
-    private GameObject glasses;
+    GameObject glasses;
     [SerializeField]
-    public GameObject weaponHolder;
-    [SerializeField]
-    private AudioSource bombSound;
+    WeaponHolderController weaponHolderController;
 
     PhotonView PV;
     public bool aiming = false;
@@ -20,35 +18,15 @@ public class Player : MonoBehaviourPunCallbacks
     public int previousWeaponId = -1;
     public bool reloading = false;
 
-    private Player_Health healthScript;
-
-    PlayerManager playerManager;
-
     public int ActorNumber { get; internal set; }
 
     void Awake()
     {
         PV = GetComponent<PhotonView>();
-        playerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<PlayerManager>();
-    }
-
-    public void SetUp(string playerName)
-    {
-        if (PV.IsMine)
-        {
-            //gameObject.name = playerName;
-
-            // Sync to everyone else
-            Hashtable hash = new Hashtable();
-            hash.Add("nickName", playerName);
-            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-        }
     }
 
     private void Start()
     {
-        healthScript = GetComponent<Player_Health>();
-
         if (PV.IsMine)
         {
             GameObject.Find("MenuUI").GetComponent<Canvas>().enabled = false;
@@ -76,24 +54,12 @@ public class Player : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (healthScript.health <= 0 && healthScript.alive)
-        {
-            Debug.Log(transform.name + " died!");
-            playerManager.Die();
-            bombSound.Play();
-        }
-
-        if (healthScript.health > 0 && !healthScript.alive)
-        {
-            Debug.Log(transform.name + " respawned!");
-        }
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             MenuUI.Instance.ToggleMenu();
             GetComponent<PlayerController>().enabled = !MenuUI.Instance.menuToggle;
             GetComponent<Player_Shoot>().enabled = !MenuUI.Instance.menuToggle;
-            GetComponent<Player>().weaponHolder.GetComponent<WeaponHolderController>().GetCurrentWeapon().GetComponent<WeaponSwayScript>().enabled = !MenuUI.Instance.menuToggle;
+            weaponHolderController.GetCurrentWeapon().GetComponent<WeaponSwayScript>().enabled = !MenuUI.Instance.menuToggle;
         }
     }
 
@@ -141,9 +107,6 @@ public class Player : MonoBehaviourPunCallbacks
 
             if (changedProps.ContainsKey("weaponId"))
                 weaponId = (int)changedProps["weaponId"];
-
-            if (changedProps.ContainsKey("nickName"))
-                gameObject.name = (string)changedProps["nickName"];
         }
     }
 }

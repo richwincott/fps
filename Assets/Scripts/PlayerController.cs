@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         if (!PV.IsMine)
         {
-            GetComponentInChildren<Camera>().gameObject.SetActive(false);
+            GetComponentInChildren<Camera>().enabled = false;
             Destroy(rb);
         }
     }

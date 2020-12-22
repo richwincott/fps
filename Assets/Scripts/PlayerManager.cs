@@ -27,12 +27,16 @@ public class PlayerManager : MonoBehaviour
     {
         Debug.Log("Instantiated Player Controller");
         player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"), new Vector3(0, 100, 0), Quaternion.identity, 0, new object[] { PV.ViewID });
-        player.GetComponent<Player>().SetUp(PhotonNetwork.NickName);
+    }
+
+    public void Respawn()
+    {
+        Die();
+        CreateController();
     }
 
     public void Die()
     {
         PhotonNetwork.Destroy(player);
-        CreateController();
     }
 }
