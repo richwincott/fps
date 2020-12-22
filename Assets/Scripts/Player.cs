@@ -18,8 +18,6 @@ public class Player : MonoBehaviourPunCallbacks
     public int previousWeaponId = -1;
     public bool reloading = false;
 
-    public int ActorNumber { get; internal set; }
-
     void Awake()
     {
         PV = GetComponent<PhotonView>();
@@ -29,18 +27,10 @@ public class Player : MonoBehaviourPunCallbacks
     {
         if (PV.IsMine)
         {
-            GameObject.Find("MenuUI").GetComponent<Canvas>().enabled = false;
-            Enable();
             //transform.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
             partyHat.layer = LayerMask.NameToLayer("DontDraw");
             glasses.layer = LayerMask.NameToLayer("DontDraw");
-        }
-    }
 
-    private void Enable()
-    {
-        if (PV.IsMine)
-        {
             //Enviroment enviroment = GameObject.Find(enviromentPrefab.name).GetComponent<Enviroment>();
             //List<GameObject> spawnPoints = enviroment.spawnPoints;
             //int randomNo = Random.Range(0, spawnPoints.Count - 1);
@@ -107,6 +97,15 @@ public class Player : MonoBehaviourPunCallbacks
 
             if (changedProps.ContainsKey("weaponId"))
                 weaponId = (int)changedProps["weaponId"];
+        }
+    }
+
+    [PunRPC]
+    void RPC_PickedUpWeapon(string weaponPrefabName)
+    {
+        if (!PV.IsMine)
+        {
+            weaponHolderController.PickUpWeapon(weaponPrefabName);
         }
     }
 }

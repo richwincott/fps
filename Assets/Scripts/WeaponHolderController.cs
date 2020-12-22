@@ -1,28 +1,31 @@
 ﻿using Photon.Pun;
+using System.IO;
 using UnityEngine;
 
 public class WeaponHolderController : MonoBehaviour
 {
     [SerializeField]
-    private Transform weaponHolder;
+    Transform weaponHolder;
+    [SerializeField]
+    GameObject[] availableWeapons;
+    [SerializeField]
+    GameObject primaryWeaponPrefab;
+    [SerializeField]
+    GameObject secondaryWeaponPrefab;
+    [SerializeField]
+    float aimSpeed = 10f;
+    [SerializeField]
+    Player player;
 
-    [SerializeField]
-    private GameObject primaryWeaponPrefab;
-    [SerializeField]
-    private GameObject secondaryWeaponPrefab;
-
-    [SerializeField]
-    private float aimSpeed = 10f;
-    [SerializeField]
-    private Player player;
-
-    private Vector3 originalPosition;
-    private GameObject primaryWeapon;
-    private GameObject secondaryWeapon;
+    Vector3 originalPosition;
+    GameObject primaryWeapon;
+    GameObject secondaryWeapon;
+    GameObject camera;
 
     private void Start()
     {
-        originalPosition = transform.localPosition;
+        originalPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
+        camera = GetComponentInParent<Camera>().gameObject;
 
         SpawnWeapons();
         ActivateCurrentWeapon();
@@ -101,6 +104,18 @@ public class WeaponHolderController : MonoBehaviour
             secondaryWeapon = Instantiate(weaponPrefab, weaponHolder);
             secondaryWeapon.SetActive(true);
         }
+
+        if (player.GetComponent<PhotonView>().IsMine)
+            player.GetComponent<PhotonView>().RPC("RPC_PickedUpWeapon", RpcTarget.All, weaponPrefab.gameObject.name);
+    }
+
+    public void PickUpWeapon(string weaponPrefabName)
+    {
+        foreach (GameObject weapon in availableWeapons)
+        {
+            if (weapon.name == weaponPrefabName)
+                PickUpWeapon(weapon);
+        }
     }
 
     public GameObject GetCurrentWeapon()
@@ -108,17 +123,15 @@ public class WeaponHolderController : MonoBehaviour
         if (player == null)
             return primaryWeapon;
 
-        if (player.weaponId == 1)
-            return primaryWeapon;
-        if (player.weaponId == 2)
-            return secondaryWeapon;
-
-        return null;
+        if (primaryWeapon && primaryWeapon.activeSelf) return primaryWeapon;
+        else if (secondaryWeapon && secondaryWeapon.activeSelf) return secondaryWeapon;
+        else return null;
     }
 
     private void Update()
     {
         SwitchWeapons();
+        PointGunAtTarget();
         AimDownSights();
     }
 
@@ -129,6 +142,24 @@ public class WeaponHolderController : MonoBehaviour
 
         if (player.GetComponent<PhotonView>().IsMine)
         {
+            // Scroll wheel
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                if (player.weaponId == 2)
+                {
+                    player.previousWeaponId = player.weaponId;
+                    player.weaponId = 1;
+                    player.TransmitWeaponId(1);
+                }
+                else if (player.weaponId == 1)
+                {
+                    player.previousWeaponId = player.weaponId;
+                    player.weaponId = 2;
+                    player.TransmitWeaponId(2);
+                }
+            }
+
+            // Buttons 1 and 2
             if (Input.GetKeyDown(KeyCode.Alpha1) && player.weaponId == 2)
             {
                 player.previousWeaponId = player.weaponId;
@@ -182,6 +213,20 @@ public class WeaponHolderController : MonoBehaviour
             {
                 transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * aimSpeed);
             }
+        }
+    }
+
+    void PointGunAtTarget()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, 100f))
+        {
+            transform.LookAt(hit.point);
+        }
+        else
+        {
+            transform.localRotation = Quaternion.identity;
         }
     }
 }

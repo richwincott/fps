@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (!PV.IsMine)
         {
             GetComponentInChildren<Camera>().enabled = false;
+            GetComponentInChildren<AudioListener>().enabled = false;
             Destroy(rb);
         }
     }

@@ -5,13 +5,12 @@ using UnityEngine.UI;
 
 public class Player_Reload : MonoBehaviourPunCallbacks
 {
-    PhotonView PV;
-
     [SerializeField]
     private WeaponHolderController weaponHolderController;
 
-    private WeaponController currentWeaponController;
-    private Player player;
+    PhotonView PV;
+    WeaponController currentWeaponController;
+    Player player;
 
     void Awake()
     {
@@ -26,12 +25,13 @@ public class Player_Reload : MonoBehaviourPunCallbacks
     private void Update()
     {
         GameObject currentWeapon = weaponHolderController.GetCurrentWeapon();
+
         if (!currentWeapon)
             return;
-        if (!currentWeaponController)
-            currentWeaponController = currentWeapon.GetComponent<WeaponController>();
 
-        if (PV.IsMine && currentWeaponController)
+        currentWeaponController = currentWeapon.GetComponent<WeaponController>();
+
+        if (PV.IsMine)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {

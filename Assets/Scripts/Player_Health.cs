@@ -47,12 +47,6 @@ public class Player_Health : MonoBehaviourPunCallbacks, IDamageable
         }
     }
 
-    private void OnHealthUpdate(int amount)
-    {
-        health = amount;
-        SetHealthText();
-    }
-
     public void TakeDamage(int amount)
     {
         PV.RPC("RPC_TakeDamage", RpcTarget.All, amount);
@@ -65,12 +59,13 @@ public class Player_Health : MonoBehaviourPunCallbacks, IDamageable
             return;
         
         health -= amount;
+        SetHealthText();
         playerUI.damageScreenFlash.SetActive(true);
 
         if (health <= 0)
         {
             Die();
-            bombSound.Play();
+            //bombSound.Play();
         }
     }
 

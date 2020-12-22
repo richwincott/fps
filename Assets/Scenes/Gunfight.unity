@@ -1118,7 +1118,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitMarker: {fileID: 1464745473}
-  respawnButton: {fileID: 0}
   damageScreenFlash: {fileID: 323088031}
   ammoText: {fileID: 472859497}
   statusText: {fileID: 1171617621}

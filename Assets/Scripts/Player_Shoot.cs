@@ -7,7 +7,7 @@ public class Player_Shoot : MonoBehaviourPunCallbacks
     [SerializeField]
     WeaponHolderController weaponHolderController;
     [SerializeField]
-    ParticleSystem hitEffectPrefab;
+    GameObject hitEffectPrefab;
     [SerializeField]
     GameObject bulletPrefab;
     [SerializeField]
@@ -41,7 +41,8 @@ public class Player_Shoot : MonoBehaviourPunCallbacks
     private void FixedUpdate()
     {
         GameObject currentWeapon = weaponHolderController.GetCurrentWeapon();
-        if (currentWeapon)
+
+        if (currentWeapon != null)
             currentWeaponController = currentWeapon.GetComponent<WeaponController>();
 
         if (currentWeaponController)
@@ -58,6 +59,7 @@ public class Player_Shoot : MonoBehaviourPunCallbacks
                             shooting = true;
                             firstLoop = true;
                             Shoot();
+                            gunSound.Play();
                             PV.RPC("RPC_Shoot", RpcTarget.All, new object[0]);
                             currentWeaponController.RemoveBulletFromMag();
                         }
@@ -72,6 +74,7 @@ public class Player_Shoot : MonoBehaviourPunCallbacks
                             shooting = true;
                             firstLoop = true;
                             Shoot();
+                            gunSound.Play();
                             PV.RPC("RPC_Shoot", RpcTarget.All, new object[0]);
                             currentWeaponController.RemoveBulletFromMag();
                         }
@@ -95,16 +98,18 @@ public class Player_Shoot : MonoBehaviourPunCallbacks
     {
         if (PV.IsMine && currentWeaponController)
         {
-            Instantiate(hitEffectPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-            playerUI.hitMarker.SetActive(true);
-            hitInfo.collider.gameObject.GetComponent<IDamageable>()?.TakeDamage(currentWeaponController.damage);
+            Instantiate(hitEffectPrefab, hitInfo.point + hitInfo.normal * 0.001f, Quaternion.FromToRotation(Vector3.up, hitInfo.normal));
+            if (hitInfo.collider.gameObject.GetComponent<IDamageable>() != null)
+            {
+                playerUI.hitMarker.SetActive(true);
+                hitInfo.collider.gameObject.GetComponent<IDamageable>().TakeDamage(currentWeaponController.damage);
+            }
         }
     }
 
     private void Shoot()
     {
         SpawnBullet();
-        gunSound.Play();
         currentWeaponController.flash.Play();
     }
 
@@ -112,16 +117,16 @@ public class Player_Shoot : MonoBehaviourPunCallbacks
     void RPC_Shoot()
     {
         if (!PV.IsMine)
-            return;
-
-        Shoot();
+        {
+            Shoot();
+        }
     }
 
     private void SpawnBullet()
     {
         Instantiate(bulletPrefab,
             currentWeaponController.bulletSpawnOffset.position,
-            currentWeaponController.animator.transform.rotation);
+            currentWeaponController.gameObject.transform.rotation);
     }
 
     public override void OnDisable()

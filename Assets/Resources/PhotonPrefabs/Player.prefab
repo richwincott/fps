@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 1667319640928434509}
+  availableWeapons:
+  - {fileID: 4607440807918600878, guid: f6907a86a033a844fbd9f0a35d707c7c, type: 3}
+  - {fileID: 4607440807918600878, guid: b38d1f0de2168fb43b3c34b755327d03, type: 3}
   primaryWeaponPrefab: {fileID: 4607440807918600878, guid: f336be75d60e7ed40ae90094151d5aac,
     type: 3}
   secondaryWeaponPrefab: {fileID: 4607440807918600878, guid: f336be75d60e7ed40ae90094151d5aac,
@@ -210,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolderController: {fileID: 1667319640928434508}
-  hitEffectPrefab: {fileID: 1329272671388549443, guid: f9df0aa80a34a7248b1d488b88a38a3d,
+  hitEffectPrefab: {fileID: 1329272671388549441, guid: f9df0aa80a34a7248b1d488b88a38a3d,
     type: 3}
   bulletPrefab: {fileID: 6524770940927993303, guid: 9886871fe887dc24fa75ab72ea68a33a,
     type: 3}

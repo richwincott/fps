@@ -11,6 +11,8 @@ public class BulletController : MonoBehaviour
     private float collisionDetectionDistance = 1f;
 
     private RaycastHit hitInfo;
+    Vector3 oldPos;
+    Vector3 newPos;
 
     public delegate void HitDelegate(RaycastHit hitInfo);
     public static event HitDelegate HitEvent;
@@ -18,9 +20,11 @@ public class BulletController : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Coroutine_Destroy());
+        oldPos = transform.position;
+        newPos = transform.position;
     }
 
-    private void FixedUpdate()
+    /*private void FixedUpdate()
     {
         CheckCollision();
         if (!hitInfo.collider)
@@ -33,6 +37,34 @@ public class BulletController : MonoBehaviour
         {
             HitEvent(hitInfo);
             Destroy(gameObject);
+        }
+    }*/
+
+    void Update()
+    {
+        newPos += speed * transform.forward * Time.deltaTime;
+
+        Vector3 direction = newPos - oldPos;
+        float distance = direction.magnitude;
+        RaycastHit hit;
+
+        if (Physics.Raycast(oldPos, direction, out hit, distance))
+        {
+            //Debug.Log(hit.transform.name);
+            /*GameObject bulletHole = Instantiate(bulletHolePrefab, hit.point + hit.normal * 0.001f, Quaternion.FromToRotation(Vector3.up, hit.normal));
+            bulletHole.transform.parent = hit.collider.gameObject.transform;
+            Destroy(bulletHole, 5f);
+            Instantiate(bulletImpactPrefab, hit.point + hit.normal * 0.001f, Quaternion.FromToRotation(Vector3.up, hit.normal));
+            Rigidbody hitRb = hit.transform.gameObject.GetComponent<Rigidbody>();
+            if (hitRb)
+                hitRb.AddForceAtPosition(transform.forward * bulletWeight, hit.point);*/
+            HitEvent(hit);
+            Destroy(gameObject);
+        }
+        else
+        {
+            oldPos = transform.position;
+            transform.position = newPos;
         }
     }
 
