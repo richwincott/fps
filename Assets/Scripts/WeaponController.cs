@@ -6,8 +6,6 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     public int damage = 25;
     [SerializeField]
-    public bool rapidFire = false;
-    [SerializeField]
     public float rateOfFire = 0.5f;
     [SerializeField]
     public Transform bulletSpawnOffset;
@@ -19,17 +17,20 @@ public class WeaponController : MonoBehaviour
     public Animator animator;
     [SerializeField]
     public GameObject model;
+    [SerializeField]
+    GameObject bulletPrefab;
+    [SerializeField]
+    AudioSource gunSound;
 
     public int maxAmmo = 200;
     public int magSize = 30;
     public int leftInMag = 30;
     public bool reloading = false;
-    public bool isBot = false;
+    float lastShootTime;
 
-    public void OnEnable()
+    private void Start()
     {
-        if (!isBot)
-            UpdateAmmoText();
+        lastShootTime = Time.time;
     }
 
     public bool CanShoot()
@@ -41,6 +42,22 @@ public class WeaponController : MonoBehaviour
     {
         leftInMag -= 1;
         UpdateAmmoText();
+    }
+
+    public void Shoot(bool isMine)
+    {
+        if (Time.time > lastShootTime + rateOfFire && CanShoot())
+        {
+            if (isMine)
+            {
+                gunSound.Play();
+                RemoveBulletFromMag();
+            }
+
+            SpawnBullet();
+            flash.Play();
+            lastShootTime = Time.time;
+        }
     }
 
     public void Reload()
@@ -74,6 +91,13 @@ public class WeaponController : MonoBehaviour
             }
         }
         UpdateAmmoText();
+    }
+
+    public void SpawnBullet()
+    {
+        Instantiate(bulletPrefab,
+            bulletSpawnOffset.position,
+            gameObject.transform.rotation);
     }
 
     public void UpdateAmmoText()

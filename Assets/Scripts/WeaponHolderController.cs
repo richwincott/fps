@@ -44,12 +44,6 @@ public class WeaponHolderController : MonoBehaviour
     {
         if (player == null)
         {
-            bool isBot = primaryWeapon.GetComponent<WeaponController>().isBot;
-
-            if (isBot)
-                return;
-
-            isBot = true;
             secondaryWeapon.SetActive(false);
             primaryWeapon.SetActive(true);
             return;
@@ -65,10 +59,14 @@ public class WeaponHolderController : MonoBehaviour
                 primaryWeapon.SetActive(false);
                 secondaryWeapon.SetActive(true);
             }
+            if (player.GetComponent<PhotonView>().IsMine)
+            {
+                GetCurrentWeapon().GetComponent<WeaponController>().UpdateAmmoText();
+            }
         }
     }
 
-    public void ResetWeapons()
+    /*public void ResetWeapons()
     {
         Destroy(primaryWeapon);
         primaryWeapon = Instantiate(primaryWeaponPrefab, weaponHolder);
@@ -76,7 +74,7 @@ public class WeaponHolderController : MonoBehaviour
         Destroy(secondaryWeapon);
         secondaryWeapon = Instantiate(secondaryWeaponPrefab, weaponHolder);
         secondaryWeapon.SetActive(false);
-    }
+    }*/
 
     public void PickUpWeapon(GameObject weaponPrefab)
     {
@@ -87,7 +85,6 @@ public class WeaponHolderController : MonoBehaviour
         {
             Destroy(primaryWeapon);
             primaryWeapon = Instantiate(weaponPrefab, weaponHolder);
-            primaryWeapon.GetComponent<WeaponController>().isBot = true;
             primaryWeapon.SetActive(true);
             return;
         }
@@ -106,7 +103,10 @@ public class WeaponHolderController : MonoBehaviour
         }
 
         if (player.GetComponent<PhotonView>().IsMine)
+        {
+            GetCurrentWeapon().GetComponent<WeaponController>().UpdateAmmoText();
             player.GetComponent<PhotonView>().RPC("RPC_PickedUpWeapon", RpcTarget.All, weaponPrefab.gameObject.name);
+        }
     }
 
     public void PickUpWeapon(string weaponPrefabName)
