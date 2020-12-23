@@ -20,7 +20,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     GameObject bulletPrefab;
     [SerializeField]
-    AudioSource gunSound;
+    AudioClip gunSound;
 
     public int maxAmmo = 200;
     public int magSize = 30;
@@ -41,7 +41,6 @@ public class WeaponController : MonoBehaviour
     public void RemoveBulletFromMag()
     {
         leftInMag -= 1;
-        UpdateAmmoText();
     }
 
     public void Shoot(bool isMine)
@@ -50,10 +49,10 @@ public class WeaponController : MonoBehaviour
         {
             if (isMine)
             {
-                gunSound.Play();
-                RemoveBulletFromMag();
+                UpdateAmmoText();
             }
 
+            RemoveBulletFromMag();
             SpawnBullet();
             flash.Play();
             lastShootTime = Time.time;
@@ -95,9 +94,12 @@ public class WeaponController : MonoBehaviour
 
     public void SpawnBullet()
     {
-        Instantiate(bulletPrefab,
+        GameObject bullet = Instantiate(bulletPrefab,
             bulletSpawnOffset.position,
             gameObject.transform.rotation);
+        bullet.GetComponent<AudioSource>().clip = gunSound;
+        bullet.GetComponent<AudioSource>().Play();
+
     }
 
     public void UpdateAmmoText()

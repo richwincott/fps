@@ -13,13 +13,14 @@ public class BulletController : MonoBehaviour
     private RaycastHit hitInfo;
     Vector3 oldPos;
     Vector3 newPos;
+    bool collision = false;
 
     public delegate void HitDelegate(RaycastHit hitInfo);
     public static event HitDelegate HitEvent;
 
     private void Start()
     {
-        StartCoroutine(Coroutine_Destroy());
+        StartCoroutine(Coroutine_Destroy(lifeSpan));
         oldPos = transform.position;
         newPos = transform.position;
     }
@@ -42,6 +43,9 @@ public class BulletController : MonoBehaviour
 
     void Update()
     {
+        if (collision)
+            return;
+
         newPos += speed * transform.forward * Time.deltaTime;
 
         Vector3 direction = newPos - oldPos;
@@ -59,7 +63,9 @@ public class BulletController : MonoBehaviour
             if (hitRb)
                 hitRb.AddForceAtPosition(transform.forward * bulletWeight, hit.point);*/
             HitEvent(hit);
-            Destroy(gameObject);
+            collision = true;
+            GetComponentInChildren<MeshRenderer>().gameObject.SetActive(false);
+            StartCoroutine(Coroutine_Destroy(0.3f));
         }
         else
         {
@@ -76,9 +82,9 @@ public class BulletController : MonoBehaviour
         }
     }
 
-    public IEnumerator Coroutine_Destroy()
+    public IEnumerator Coroutine_Destroy(float time)
     {
-        yield return new WaitForSeconds(lifeSpan);
+        yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
 }
