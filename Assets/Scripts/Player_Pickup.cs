@@ -63,7 +63,7 @@ public class Player_Pickup : MonoBehaviourPunCallbacks
 
             if (availablePickup)
             {
-                if (availablePickup.name == "Chest(Clone)")
+                if (availablePickup.name == "Chest(Clone)" || availablePickup.name == "Chest")
                     playerUI.statusText.GetComponent<Text>().text = "Press 'F' to open the chest";
                 else
                     playerUI.statusText.GetComponent<Text>().text = "Press 'F' to pickup " + availablePickup.GetComponent<WeaponPickup>().weaponPrefab.name;
@@ -72,7 +72,7 @@ public class Player_Pickup : MonoBehaviourPunCallbacks
                 {
                     playerUI.statusText.GetComponent<Text>().text = "";
 
-                    if (availablePickup.name == "Chest(Clone)")
+                    if (availablePickup.name == "Chest(Clone)" || availablePickup.name == "Chest")
                     {
                         availablePickup.GetComponent<Chest>().Open();
                     }

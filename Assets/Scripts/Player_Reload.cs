@@ -9,7 +9,6 @@ public class Player_Reload : MonoBehaviourPunCallbacks
     private WeaponHolderController weaponHolderController;
 
     PhotonView PV;
-    WeaponController currentWeaponController;
     Player player;
 
     void Awake()
@@ -24,13 +23,6 @@ public class Player_Reload : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        GameObject currentWeapon = weaponHolderController.GetCurrentWeapon();
-
-        if (!currentWeapon)
-            return;
-
-        currentWeaponController = currentWeapon.GetComponent<WeaponController>();
-
         if (PV.IsMine)
         {
             if (Input.GetKeyDown(KeyCode.R))
@@ -54,6 +46,7 @@ public class Player_Reload : MonoBehaviourPunCallbacks
 
     public void Reload()
     {
+        WeaponController currentWeaponController = weaponHolderController.GetCurrentWeapon().GetComponent<WeaponController>();
         currentWeaponController.reloading = true;
         currentWeaponController.animator.Play("Reload");
         StartCoroutine(ReloadTimer());
@@ -61,6 +54,7 @@ public class Player_Reload : MonoBehaviourPunCallbacks
 
     public IEnumerator ReloadTimer()
     {
+        WeaponController currentWeaponController = weaponHolderController.GetCurrentWeapon().GetComponent<WeaponController>();
         yield return new WaitForSeconds(1f);
         currentWeaponController.reloading = false;
         currentWeaponController.animator.Play("Idle");

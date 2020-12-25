@@ -1305,7 +1305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1910273478
 Transform:
   m_ObjectHideFlags: 0
@@ -1680,5 +1680,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c9dd945804d8d94bae85c44f6d1d9dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enviromentPrefab: {fileID: 7286537656436217073, guid: 9f9682c5dcd819a49955f1c28261bc9e,
+  enviromentPrefab: {fileID: 7513660791695810813, guid: 6a131e4557abad94c8a07644773e4edf,
     type: 3}

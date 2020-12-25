@@ -31,14 +31,14 @@ public class Player : MonoBehaviourPunCallbacks
             partyHat.layer = LayerMask.NameToLayer("DontDraw");
             glasses.layer = LayerMask.NameToLayer("DontDraw");
 
-            //Enviroment enviroment = GameObject.Find(enviromentPrefab.name).GetComponent<Enviroment>();
-            //List<GameObject> spawnPoints = enviroment.spawnPoints;
-            //int randomNo = Random.Range(0, spawnPoints.Count - 1);
-            //transform.SetPositionAndRotation(spawnPoints[randomNo].transform.position, spawnPoints[randomNo].transform.rotation);
-            int x = Random.Range(-24, 24);
-            int z = Random.Range(-24, 23);
-            Vector3 randomLocation = new Vector3(x, 70, z);
-            transform.SetPositionAndRotation(randomLocation, new Quaternion(0, 0, 0, 0));
+            Enviroment enviroment = GameObject.Find("Enviroment").GetComponent<Enviroment>();
+            List<GameObject> spawnPoints = enviroment.spawnPoints;
+            int randomNo = Random.Range(0, spawnPoints.Count - 1);
+            transform.SetPositionAndRotation(spawnPoints[randomNo].transform.position, spawnPoints[randomNo].transform.rotation);
+            //int x = Random.Range(-24, 24);
+            //int z = Random.Range(-24, 23);
+            //Vector3 randomLocation = new Vector3(x, 70, z);
+            //transform.SetPositionAndRotation(randomLocation, new Quaternion(0, 0, 0, 0));
         }
     }
 

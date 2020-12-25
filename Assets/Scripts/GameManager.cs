@@ -14,10 +14,10 @@ public class GameManager : MonoBehaviour
 
     public void spawnLevel()
     {
-        if (!GameObject.Find(enviromentPrefab.name))
+        if (!GameObject.Find("Enviroment"))
         {
             GameObject enviroment = Instantiate(enviromentPrefab);
-            enviroment.name = enviromentPrefab.name;
+            enviroment.name = "Enviroment";
         }
     }
 }
