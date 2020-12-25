@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1220368694005868931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5744132417205458610}
+  m_Layer: 0
+  m_Name: RecoilRotation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5744132417205458610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220368694005868931}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.059, z: 0.281}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6174610552440542955}
+  m_Father: {fileID: 6429895277243712924}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1667319640928434510
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,7 +58,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.145, y: -0.305, z: 0.771}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 906338257818154121}
   m_Father: {fileID: 1667319642037247962}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -43,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8878033bff5a3da498d7eda01c143fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponHolder: {fileID: 1667319640928434509}
+  weaponHolder: {fileID: 6174610552440542955}
   availableWeapons:
   - {fileID: 4607440807918600878, guid: f6907a86a033a844fbd9f0a35d707c7c, type: 3}
   - {fileID: 4607440807918600878, guid: b38d1f0de2168fb43b3c34b755327d03, type: 3}
@@ -53,6 +85,7 @@ MonoBehaviour:
     type: 3}
   aimSpeed: 12
   player: {fileID: 2593069311432679323}
+  recoilScript: {fileID: 3548623483582925687}
 --- !u!1 &1667319641286199784
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,6 +600,98 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &3493540857764164860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6429895277243712924}
+  m_Layer: 0
+  m_Name: RecoilPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6429895277243712924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3493540857764164860}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5744132417205458610}
+  m_Father: {fileID: 906338257818154121}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4073190735815207362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6174610552440542955}
+  - component: {fileID: 3548623483582925687}
+  m_Layer: 0
+  m_Name: GunSpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6174610552440542955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4073190735815207362}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.094999984}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5744132417205458610}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3548623483582925687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4073190735815207362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26514ff11da2f0b4b8a2e4938f20f424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RecoilPositionTranform: {fileID: 6429895277243712924}
+  RecoilRotationTranform: {fileID: 5744132417205458610}
+  PositionDampTime: 4
+  RotationDampTime: 2
+  Recoil1: 23
+  Recoil2: 67
+  Recoil3: 7
+  Recoil4: 80
+  RecoilRotation: {x: -10, y: 4, z: 6}
+  RecoilKickBack: {x: 0.15, y: 0.2, z: -0.18}
+  RecoilRotation_Aim: {x: -5, y: 2, z: 3}
+  RecoilKickBack_Aim: {x: 0.07, y: 0.1, z: -0.09}
+  CurrentRecoil1: {x: 0, y: 0, z: 0}
+  CurrentRecoil2: {x: 0, y: 0, z: 0}
+  CurrentRecoil3: {x: 0, y: 0, z: 0}
+  CurrentRecoil4: {x: 0, y: 0, z: 0}
+  RotationOutput: {x: 0, y: 0, z: 0}
+  aim: 0
 --- !u!1 &6803038507976960259
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +749,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba368cf07c4e13542b3ee8a4ce415c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7414549957700865658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 906338257818154121}
+  m_Layer: 0
+  m_Name: RecoilCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &906338257818154121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7414549957700865658}
+  m_LocalRotation: {x: -0, y: -0, z: 3.8855095e-16, w: 1}
+  m_LocalPosition: {x: -0, y: 0.059, z: -0.186}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6429895277243712924}
+  m_Father: {fileID: 1667319640928434509}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2291892300191492309
 PrefabInstance:
   m_ObjectHideFlags: 0

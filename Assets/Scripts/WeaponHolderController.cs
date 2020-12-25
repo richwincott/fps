@@ -16,6 +16,8 @@ public class WeaponHolderController : MonoBehaviour
     float aimSpeed = 10f;
     [SerializeField]
     Player player;
+    [SerializeField]
+    New_Weapon_Recoil_Script recoilScript;
 
     Vector3 originalPosition;
     GameObject primaryWeapon;
@@ -188,9 +190,15 @@ public class WeaponHolderController : MonoBehaviour
         if (player.GetComponent<PhotonView>().IsMine)
         {
             if (Input.GetButton("Fire2"))
+            {
                 transform.localPosition = Vector3.Lerp(transform.localPosition, GetCurrentWeapon().GetComponent<WeaponController>().aimPosition, Time.deltaTime * aimSpeed);
+                recoilScript.aim = true;
+            }
             else
+            {
                 transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * aimSpeed);
+                recoilScript.aim = false;
+            }
 
             if (Input.GetButtonDown("Fire2"))
             {

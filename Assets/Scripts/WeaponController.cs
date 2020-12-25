@@ -27,10 +27,12 @@ public class WeaponController : MonoBehaviour
     public int leftInMag = 30;
     public bool reloading = false;
     float lastShootTime;
+    New_Weapon_Recoil_Script recoilScript;
 
     private void Start()
     {
         lastShootTime = Time.time;
+        recoilScript = GetComponentInParent<New_Weapon_Recoil_Script>();
     }
 
     public bool CanShoot()
@@ -50,6 +52,7 @@ public class WeaponController : MonoBehaviour
             if (isMine)
             {
                 UpdateAmmoText();
+                recoilScript.Fire();
             }
 
             RemoveBulletFromMag();
