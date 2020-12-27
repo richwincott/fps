@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class Player_Health : MonoBehaviourPunCallbacks, IDamageable
 {
-    [SerializeField]
-    private AudioSource bombSound;
-
     PhotonView PV;
     public int health = 100;
     public bool alive = true;
@@ -65,7 +62,6 @@ public class Player_Health : MonoBehaviourPunCallbacks, IDamageable
         if (health <= 0)
         {
             Die();
-            //bombSound.Play();
         }
     }
 

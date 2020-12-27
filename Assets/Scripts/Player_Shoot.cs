@@ -8,6 +8,8 @@ public class Player_Shoot : MonoBehaviourPunCallbacks
     WeaponHolderController weaponHolderController;
     [SerializeField]
     GameObject hitEffectPrefab;
+    [SerializeField]
+    GameObject hitEffectPlayerPrefab;
 
     PlayerUI playerUI;
     PhotonView PV;
@@ -64,7 +66,7 @@ public class Player_Shoot : MonoBehaviourPunCallbacks
     {
         if (PV.IsMine)
         {
-            Instantiate(hitEffectPrefab, hitInfo.point + hitInfo.normal * 0.001f, Quaternion.FromToRotation(Vector3.up, hitInfo.normal));
+            Instantiate(hitInfo.collider.gameObject.CompareTag("Player") ? hitEffectPlayerPrefab : hitEffectPrefab, hitInfo.point + hitInfo.normal * 0.001f, Quaternion.FromToRotation(Vector3.up, hitInfo.normal));
             if (hitInfo.collider.gameObject.GetComponent<IDamageable>() != null)
             {
                 WeaponController currentWeaponController = weaponHolderController.GetCurrentWeapon().GetComponent<WeaponController>();

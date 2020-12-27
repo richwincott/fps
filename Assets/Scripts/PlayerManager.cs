@@ -6,12 +6,15 @@ using System.IO;
 
 public class PlayerManager : MonoBehaviour
 {
+    AudioSource bombSound;
     PhotonView PV;
     GameObject player;
+    AudioSource boomSound;
 
     void Awake()
     {
         PV = GetComponent<PhotonView>();
+        bombSound = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -37,6 +40,7 @@ public class PlayerManager : MonoBehaviour
 
     public void Die()
     {
+        bombSound.Play();
         PhotonNetwork.Destroy(player);
     }
 }

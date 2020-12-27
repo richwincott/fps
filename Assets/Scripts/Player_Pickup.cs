@@ -34,7 +34,7 @@ public class Player_Pickup : MonoBehaviourPunCallbacks
             if (Physics.Raycast(myCamera.transform.position, myCamera.transform.forward, out hitInfo, 2f))
             {
 
-                if (hitInfo.collider.gameObject.layer != LayerMask.NameToLayer("Pickup"))
+                if (!hitInfo.collider.gameObject.CompareTag("Pickup"))
                     return;
 
                 if (hitInfo.collider.gameObject.GetComponent<Status>().active)
@@ -63,7 +63,7 @@ public class Player_Pickup : MonoBehaviourPunCallbacks
 
             if (availablePickup)
             {
-                if (availablePickup.name == "Chest(Clone)" || availablePickup.name == "Chest")
+                if (availablePickup.name.IndexOf("Chest") > -1)
                     playerUI.statusText.GetComponent<Text>().text = "Press 'F' to open the chest";
                 else
                     playerUI.statusText.GetComponent<Text>().text = "Press 'F' to pickup " + availablePickup.GetComponent<WeaponPickup>().weaponPrefab.name;
@@ -72,7 +72,7 @@ public class Player_Pickup : MonoBehaviourPunCallbacks
                 {
                     playerUI.statusText.GetComponent<Text>().text = "";
 
-                    if (availablePickup.name == "Chest(Clone)" || availablePickup.name == "Chest")
+                    if (availablePickup.name.IndexOf("Chest") > -1)
                     {
                         availablePickup.GetComponent<Chest>().Open();
                     }

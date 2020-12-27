@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 6974954183953493321}
   - component: {fileID: 4789370827452454151}
   - component: {fileID: 114140264373358622}
-  - component: {fileID: 82541678826853106}
   - component: {fileID: 4952919043024190750}
   - component: {fileID: 3411892735118803397}
   - component: {fileID: 1290628860626907595}
@@ -195,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraHolder: {fileID: 1667319642037247909}
-  mouseSensitivity: 40
+  mouseSensitivity: 80
   walkSpeedMultiplier: 3.5
   sprintSpeedMultiplier: 6
   jumpForce: 300
@@ -247,6 +246,8 @@ MonoBehaviour:
   weaponHolderController: {fileID: 1667319640928434508}
   hitEffectPrefab: {fileID: 1329272671388549441, guid: f9df0aa80a34a7248b1d488b88a38a3d,
     type: 3}
+  hitEffectPlayerPrefab: {fileID: 1329272671388549441, guid: 59dd066dd43a3c14689daa5addc767f0,
+    type: 3}
 --- !u!114 &6974954183953493321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1601c417d21cc84d84e4ce5a4f1a57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombSound: {fileID: 0}
   health: 100
   alive: 1
 --- !u!114 &114140264373358622
@@ -288,102 +288,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolderController: {fileID: 1667319640928434508}
---- !u!82 &82541678826853106
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1667319641360453609}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 642db94cca37f9649aaf7c261ae824cd, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.3
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &4952919043024190750
 MonoBehaviour:
   m_ObjectHideFlags: 0

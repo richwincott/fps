@@ -11,6 +11,8 @@ public class Chest : MonoBehaviour
 
     [SerializeField]
     GameObject[] weaponPrefabs = new GameObject[2];
+    [SerializeField]
+    Animator chestAnimator;
 
     void Start()
     {
@@ -40,6 +42,15 @@ public class Chest : MonoBehaviour
 
     public void Open()
     {
+        chestAnimator.Play("Shake");
+
+        StartCoroutine("SpawnWeapons");
+    }
+
+    IEnumerator SpawnWeapons()
+    {
+        yield return new WaitForSeconds(2f);
+
         GameObject weaponPickup1 = Instantiate(weaponPickupPrefab, weaponSpawns[0].transform);
         GameObject weaponPickup2 = Instantiate(weaponPickupPrefab, weaponSpawns[1].transform);
         GameObject weaponPickup3 = Instantiate(weaponPickupPrefab, weaponSpawns[2].transform);

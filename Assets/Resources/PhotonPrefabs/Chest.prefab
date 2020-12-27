@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8210796755312633093}
   - component: {fileID: 2031137526496326918}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: WeaponSpawn002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 7664031234197934402}
   - component: {fileID: 65749641604039740}
   - component: {fileID: 3498197378112098316}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Chest
   m_TagString: Pickup
   m_Icon: {fileID: 0}
@@ -117,6 +117,7 @@ MonoBehaviour:
   weaponPrefabs:
   - {fileID: 4607440807918600878, guid: b38d1f0de2168fb43b3c34b755327d03, type: 3}
   - {fileID: 4607440807918600878, guid: f6907a86a033a844fbd9f0a35d707c7c, type: 3}
+  chestAnimator: {fileID: 5600164512230112437}
 --- !u!65 &65749641604039740
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -162,7 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1014822727320506565}
   - component: {fileID: 7642062249846425430}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: WeaponSpawn003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2133826264901684158}
   - component: {fileID: 1814909947350829138}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: WeaponSpawn001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,6 +303,12 @@ PrefabInstance:
 --- !u!4 &5543263248170032469 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4090485074951322, guid: e6fd1715965d63043a413dea8f583622,
+    type: 3}
+  m_PrefabInstance: {fileID: 5540316807237132751}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5600164512230112437 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95964531805101434, guid: e6fd1715965d63043a413dea8f583622,
     type: 3}
   m_PrefabInstance: {fileID: 5540316807237132751}
   m_PrefabAsset: {fileID: 0}
