@@ -4802,7 +4802,7 @@ MonoBehaviour:
   damage: 12
   rateOfFire: 0.1
   bulletSpawnOffset: {fileID: 2641533274110675903}
-  aimPosition: {x: 0, y: -0.197, z: 0.493}
+  aimPosition: {x: 0, y: -0.191, z: 0.493}
   flash: {fileID: 5109527437830867328}
   animator: {fileID: 7896941366013031349}
   model: {fileID: 207080084133495778, guid: 1d5baef8b9055e440abe5195e61d750b, type: 3}

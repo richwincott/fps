@@ -1,7 +1,9 @@
-﻿using ExitGames.Client.Photon;
-using Photon.Pun;
+﻿using Photon.Pun;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class Player_Health : MonoBehaviourPunCallbacks, IDamageable
 {
@@ -44,13 +46,13 @@ public class Player_Health : MonoBehaviourPunCallbacks, IDamageable
         }
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, Photon.Realtime.Player player)
     {
-        PV.RPC("RPC_TakeDamage", RpcTarget.All, amount);
+        PV.RPC("RPC_TakeDamage", RpcTarget.All, amount, player);
     }
 
     [PunRPC]
-    void RPC_TakeDamage(int amount)
+    void RPC_TakeDamage(int amount, Photon.Realtime.Player player)
     {
         if (!PV.IsMine)
             return;
@@ -61,12 +63,37 @@ public class Player_Health : MonoBehaviourPunCallbacks, IDamageable
 
         if (health <= 0)
         {
-            Die();
+            Die(player);
         }
     }
 
-    void Die()
+    void Die(Photon.Realtime.Player player)
     {
+        IncreaseKillsOrDeathsPlayerCustomProps(player, "kills");
+        IncreaseKillsOrDeathsPlayerCustomProps(PhotonNetwork.LocalPlayer, "deaths");
+        PV.RPC("RPC_BroadcastDeath", RpcTarget.All, player, PhotonNetwork.LocalPlayer);
         playerManager.Respawn();
+    }
+
+    [PunRPC]
+    void RPC_BroadcastDeath(Photon.Realtime.Player player1, Photon.Realtime.Player player2)
+    {
+        GameObject go = Instantiate(playerUI.killFeedListItem, playerUI.killFeedPanel.transform);
+        go.GetComponent<TMP_Text>().text = player1.NickName + " killed " + player2.NickName;
+        Destroy(go, 3f);
+    }
+
+    void IncreaseKillsOrDeathsPlayerCustomProps(Photon.Realtime.Player player, string key)
+    {
+        Hashtable current = player.CustomProperties;
+        Hashtable hash = new Hashtable();
+        foreach(string _key in current.Keys)
+        {
+            if (_key != key)
+                hash.Add(_key, current[_key]);
+        }
+        object currentKillsValue = current[key];
+        hash.Add(key, currentKillsValue != null ? (int)currentKillsValue + 1 : 1);
+        player.SetCustomProperties(hash);
     }
 }

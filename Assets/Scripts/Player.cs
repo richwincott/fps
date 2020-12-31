@@ -44,6 +44,9 @@ public class Player : MonoBehaviourPunCallbacks
 
     private void Update()
     {
+        if (!PV.IsMine)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             MenuUI.Instance.ToggleMenu();

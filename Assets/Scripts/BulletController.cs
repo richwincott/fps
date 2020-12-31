@@ -65,7 +65,7 @@ public class BulletController : MonoBehaviour
             HitEvent(hit);
             collision = true;
             GetComponentInChildren<MeshRenderer>().gameObject.SetActive(false);
-            StartCoroutine(Coroutine_Destroy(0.35f));
+            StartCoroutine(Coroutine_Destroy(0.4f));
         }
         else
         {

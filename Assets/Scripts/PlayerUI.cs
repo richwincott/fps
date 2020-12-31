@@ -12,4 +12,8 @@ public class PlayerUI : MonoBehaviour
     public GameObject statusText;
     [SerializeField]
     public GameObject playerCountText;
+    [SerializeField]
+    public GameObject killFeedPanel;
+    [SerializeField]
+    public GameObject killFeedListItem;
 }

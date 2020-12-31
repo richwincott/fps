@@ -71,7 +71,7 @@ public class Player_Shoot : MonoBehaviourPunCallbacks
             {
                 WeaponController currentWeaponController = weaponHolderController.GetCurrentWeapon().GetComponent<WeaponController>();
                 playerUI.hitMarker.SetActive(true);
-                hitInfo.collider.gameObject.GetComponent<IDamageable>().TakeDamage(currentWeaponController.damage);
+                hitInfo.collider.gameObject.GetComponent<IDamageable>().TakeDamage(currentWeaponController.damage, PhotonNetwork.LocalPlayer);
             }
         }
     }

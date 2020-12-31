@@ -26,7 +26,7 @@ public class WeaponHolderController : MonoBehaviour
 
     private void Start()
     {
-        originalPosition = new Vector3(0.145f, -0.305f, 0.771f);
+        originalPosition = new Vector3(0.145f, -0.295f, 0.771f);
         camera = GetComponentInParent<Camera>().gameObject;
 
         SpawnWeapons();
